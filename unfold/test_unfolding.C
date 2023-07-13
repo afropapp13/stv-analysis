@@ -130,20 +130,20 @@ struct TruthFileInfo {
 // describing nuiscomp output files containing the differential cross-section
 // predictions in each true bin
 std::map< std::string, TruthFileInfo > truth_file_map = {
-  { "GENIE 2.12.10",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv2.root", kBlue, 1 } },
-  { "GENIE 3.0.6",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3.root", kBlack, 2} },
-  { "GENIE 3.2.0 G18_02a",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g1802a.root", kBlack, 2} },
-  { "GENIE 3.2.0 G21_11a",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g2111a.root", kBlack, 2} },
-  { "GENIE 3.2.0 G21_11b",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g2111b.root", kBlack, 2} },
-  { "NEUT 5.4.0.1",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-neut.root", kRed, 9} },
-  { "NuWro 19.02.1",
-    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-nuwro.root", kViolet, 7} },
+  //{ "GENIE 2.12.10",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv2.root", kBlue, 1 } },
+  //{ "GENIE 3.0.6",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3.root", kBlack, 2} },
+  //{ "GENIE 3.2.0 G18_02a",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g1802a.root", kBlack, 2} },
+  //{ "GENIE 3.2.0 G21_11a",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g2111a.root", kBlack, 2} },
+  //{ "GENIE 3.2.0 G21_11b",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-gv3-g2111b.root", kBlack, 2} },
+  //{ "NEUT 5.4.0.1",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-neut.root", kRed, 9} },
+  //{ "NuWro 19.02.1",
+  //  {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/ubmc/comp-all/comp-nuwro.root", kViolet, 7} },
 // { "GiBUU 2021",
 //    {"/uboone/app/users/gardiner/temp-gen/BuildEventGenerators/nuisance/build/myout.root", kGreen, 10} },
 };
@@ -189,16 +189,12 @@ struct SampleInfo {
 std::map< std::string, SampleInfo > sample_info_map = {
 
   // 2D muon measurement
-  { "MicroBooNE_CC1MuNp_XSec_2D_PmuCosmu_nu_MC", { "/uboone/data/users"
-    "/gardiner/respmat-test-new-Muon2D.root", "/uboone/app/users/gardiner"
-    "/stv/mc/nuisance/data/MicroBooNE/mybins2Dmuon.txt",
-    "mybins_mcc9_2D_muon.txt" } },
+  { "MicroBooNE_CC1MuNp_XSec_2D_Pp_nu_MC", { "/uboone/data/users/apapadop/PeLEE_PostProcessing/new_stv_analysis.root", "/uboone/app/users/apapadop/master_stv_analysis/mybins_mcc9_2D_proton.txt",
+    "/uboone/app/users/apapadop/master_stv_analysis/myconfig_mcc9_2D_proton.txt" } },
 
   // 2D proton measurement
-  { "MicroBooNE_CC1MuNp_XSec_2D_PpCosp_nu_MC", { "/uboone/data/users"
-    "/gardiner/respmat-test-new-Proton2D.root", "/uboone/app/users/gardiner"
-    "/stv/mc/nuisance/data/MicroBooNE/mybins2Dproton.txt",
-    "mybins_mcc9_2D_proton.txt" } },
+  { "MicroBooNE_CC1MuNp_XSec_2D_PpCosp_nu_MC", { "/uboone/data/users/apapadop/PeLEE_PostProcessing/new_stv_analysis.root", "/uboone/app/users/apapadop/master_stv_analysis/mybins_mcc9_2D_proton.txt",
+    "/uboone/app/users/apapadop/master_stv_analysis/myconfig_mcc9_2D_proton.txt" } },
 
 };
 
@@ -316,7 +312,8 @@ void test_unfolding() {
   const auto& sample_info = sample_info_map.at( SAMPLE_NAME );
   //const auto& respmat_file_name = sample_info.respmat_file_;
 
-  const std::string respmat_file_name( "/uboone/data/users/gardiner/all_fixed.root" );
+  //  const std::string respmat_file_name( "/uboone/data/users/gardiner/all_fixed.root" );
+  const std::string respmat_file_name( "/uboone/data/users/apapadop/PeLEE_PostProcessing/new_stv_analysis.root" );
 
   // Do the systematics calculations in preparation for unfolding
   //auto* syst_ptr = new MCC9SystematicsCalculator( respmat_file_name, "../systcalc_unfold_fd.conf" );
@@ -372,11 +369,11 @@ void test_unfolding() {
   constexpr bool USE_ADD_SMEAR = true;
 
   std::unique_ptr< Unfolder > unfolder (
-    //new DAgostiniUnfolder( NUM_DAGOSTINI_ITERATIONS )
-    new DAgostiniUnfolder( DAgostiniUnfolder::ConvergenceCriterion
-      ::FigureOfMerit, 0.025 )
-    //new WienerSVDUnfolder( true,
-    //  WienerSVDUnfolder::RegularizationMatrixType::kSecondDeriv )
+    // //new DAgostiniUnfolder( NUM_DAGOSTINI_ITERATIONS )
+    //new DAgostiniUnfolder( DAgostiniUnfolder::ConvergenceCriterion
+    //  ::FigureOfMerit, 0.025 )
+    new WienerSVDUnfolder( true,
+      WienerSVDUnfolder::RegularizationMatrixType::kSecondDeriv )
   );
 
   UnfoldedMeasurement result = unfolder->unfold( syst );
@@ -578,7 +575,7 @@ void test_unfolding() {
   lg->Draw( "same" );
 
   // Plot slices of the unfolded result
-  auto* sb_ptr = new SliceBinning( "../mybins_all.txt" );
+  auto* sb_ptr = new SliceBinning( "../tutorial_slice_config.txt" );
   auto& sb = *sb_ptr;
 
   // Get the factors needed to convert to cross-section units
@@ -813,6 +810,7 @@ void test_unfolding() {
 
     double ymax = -DBL_MAX;
     slice_unf->hist_->Draw( "e" );
+
     for ( const auto& pair : slice_gen_map ) {
       const auto& name = pair.first;
       const auto* slice_h = pair.second;
@@ -828,7 +826,7 @@ void test_unfolding() {
       slice_h->hist_->SetLineStyle( file_info.style_ );
       slice_h->hist_->SetLineWidth( 4 );
 
-      slice_h->hist_->Draw( "hist same" );
+      //slice_h->hist_->Draw( "hist same" );
     }
 
     slice_cv->hist_->SetStats( false );

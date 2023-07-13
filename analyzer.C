@@ -1,8 +1,8 @@
-// Analysis macro for use in the CCNp0pi single transverse variable analysis
+// Analysis macro for use in the CC1p0pi single transverse variable analysis
 // Designed for use with the PeLEE group's "searchingfornues" ntuples
 //
-// Updated 22 April 2023
-// Steven Gardiner <gardiner@fnal.gov>
+// Updated 12 July 2023
+// Afroditi Papadopoulou <apapadopoulou@anl.gov>
 
 // Standard library includes
 #include <cmath>

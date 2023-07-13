@@ -1,6 +1,6 @@
 #include "WeightHandler.hh"
 
-const std::string INPUT_DIR_NAME = "/uboone/data/users/gardiner/ntuples-stv";
+const std::string INPUT_DIR_NAME = "/uboone/data/users/apapadop/PeLEE_PostProcessing";
 const std::string OUTPUT_DIR_NAME = INPUT_DIR_NAME + "/weight_dumps";
 
 void dump_them( const std::string& input_file_name ) {
