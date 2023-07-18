@@ -69,7 +69,7 @@ void effpur() {
   "sel_CCNp0pi" };
 
   TChain stv_ch( "stv_tree" );
-  stv_ch.Add( "/uboone/data/users/gardiner/ntuples-stv/stv-prodgenie_bnb_nu_uboone_overlay_mcc9.1_v08_00_00_26_filter_run1_reco2_reco2.root" );
+  stv_ch.Add( "/uboone/data/users/apapadop/PeLEE_PostProcessing/stv-prodgenie_bnb_nu_uboone_overlay_mcc9.1_v08_00_00_26_filter_run1_reco2_reco2.root" );
 
   size_t num_points = selection_defs.size();
   TGraph* eff_graph = new TGraph( num_points );

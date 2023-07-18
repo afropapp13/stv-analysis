@@ -29,7 +29,6 @@ void tutorial_slice_plots() {
   #endif
 
   auto* syst_ptr = new MCC9SystematicsCalculator(
-    //"/uboone/data/users/gardiner/tutorial_univmake_output.root",
     "/uboone/data/users/apapadop/PeLEE_PostProcessing/new_stv_analysis.root",
     "systcalc.conf" );
   auto& syst = *syst_ptr;

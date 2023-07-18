@@ -67,7 +67,7 @@ class IntegratedFluxUniverseManager {
       //  "Active.root" );
 
       // Use a local copy in /uboone/app/ to deal with /pnfs outages
-      TFile in_file( "/uboone/app/users/gardiner/stv/analysis/"
+      TFile in_file( "/pnfs/uboone/persistent/users/apapadop/Fluxes/"
         "MCC9_FluxHist_volTPCActive.root" );
 
       // Get the integrated CV numu flux. Note that, since factors like the

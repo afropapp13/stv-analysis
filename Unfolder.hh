@@ -204,7 +204,7 @@ UnfoldedMeasurement Unfolder::blockwise_unfold( const TMatrixD& data_signal,
     int b_idx = block_pair.first;
     const auto& block_bins = block_pair.second;
 
-    std::cout << "Unfolding block " << b_idx << '\n';
+    //std::cout << "Unfolding block " << b_idx << '\n';
 
     // Get the dimensions of the current block
     int num_block_true_bins = block_bins.true_bin_indices_.size();

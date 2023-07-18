@@ -122,7 +122,7 @@ NormShapeCovMatrix make_block_diagonal_norm_shape_covmat(
     int b_idx = block_pair.first;
     const auto& block_bins = block_pair.second;
 
-    std::cout << "Norm/shape decomposition for block " << b_idx << '\n';
+    //std::cout << "Norm/shape decomposition for block " << b_idx << '\n';
 
     // Get the dimensions of the current block
     int num_block_true_bins = block_bins.size();

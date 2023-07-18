@@ -1,2 +1,0 @@
-  av0_name  av0_units  bnb_data_pot  num_active_vars  num_bins  num_other_vars  ratio_max  uBTune_chi2  uBTune_pvalue  x0_max  x0_min  y_axis_title  y_max  y_min
-  {$reco $p_{\mu}$$}  {$GeV$/c$$}  679000000000000000000.000000  1  10  0  0.868532  7.332915  0.602501  1.200000  0.250000  {$d\sigma /  dreco $p_{\mu}$\text{ }(10^{-38}\text{ cm}^{2} / GeV$/c$ / \mathrm{Ar})$}  33.441756  0.000000

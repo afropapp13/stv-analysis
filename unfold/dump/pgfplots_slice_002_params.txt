@@ -1,2 +1,0 @@
-  av0_name  av0_units  bnb_data_pot  num_active_vars  num_bins  num_other_vars  ratio_max  uBTune_chi2  uBTune_pvalue  x0_max  x0_min  y_axis_title  y_max  y_min
-  {$reco bin number$}  {$$}  679000000000000000000.000000  1  19  0  1.879540  14.763168  0.678160  19.000000  0.000000  {$d\sigma /  dreco bin number\text{ }(10^{-38}\text{ cm}^{2} / \mathrm{Ar})$}  5.247632  0.000000
