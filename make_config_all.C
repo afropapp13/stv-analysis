@@ -148,7 +148,7 @@ void make_config_all() {
     { "bin number", "\\text{ bin number}", "", "" }
   };
 
-  std::string selection = "sel_CCNp0pi";
+  std::string selection = "sel_CC1p0pi";
   std::string signal_def = "mc_is_signal";
 
   // By construction, MC event categories 5-11 contain all beam-correlated
@@ -1309,7 +1309,7 @@ void make_config_all() {
   //for ( int ob = 0; ob < num_ord_bins; ++ob ) {
   //  const auto& rbin = reco_bins.at( ob );
 
-  //  // Strip out the initial selection flag ("sel_CCNp0pi") and replace
+  //  // Strip out the initial selection flag ("sel_CC1p0pi") and replace
   //  // it in the selection cuts with the sideband selection
   //  size_t drop_pos = rbin.selection_cuts_.find( "&&" );
   //  std::string sel_new = sel_combined + ' '

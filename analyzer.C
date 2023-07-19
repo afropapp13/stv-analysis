@@ -92,7 +92,7 @@ constexpr int PI_PLUS = 211;
 
 // Values of parameters to use in analysis cuts
 constexpr float DEFAULT_PROTON_PID_CUT = 0.2;
-constexpr float LEAD_P_MIN_MOM_CUT = 0.250; // GeV/c
+constexpr float LEAD_P_MIN_MOM_CUT = 0.3; // GeV/c
 constexpr float LEAD_P_MAX_MOM_CUT = 1.; // GeV/c
 constexpr float MUON_P_MIN_MOM_CUT = 0.100; // GeV/c
 constexpr float MUON_P_MAX_MOM_CUT = 1.200; // GeV/c
@@ -113,16 +113,6 @@ constexpr float TRACK_SCORE_CUT = 0.5;
 double proton_pid_cut( double track_length ) {
 
   double cut = DEFAULT_PROTON_PID_CUT;
-
-  // Piecewise cut removed 27 June 2021
-  //// All track length values are in cm
-  //if ( track_length >= 0. && track_length <= 10.5 ) {
-  //  cut = -0.0034219305*std::pow( track_length, 2 );
-  //  cut += 0.018436866*track_length + 0.062718401;
-  //}
-  //else if ( track_length > 10.5 && track_length <= 33.1776508 ) {
-  //  cut = 0.014153245*( track_length - 10.5 ) - 0.12096235;
-  //}
 
   return cut;
 
@@ -365,7 +355,7 @@ class AnalysisEvent {
     // above LEAD_P_MIN_MOM_CUT and below LEAD_P_MAX_MOM_CUT
     bool sel_lead_p_passed_mom_cuts_ = false;
     // Intersection of all of the above requirements
-    bool sel_CCNp0pi_ = false;
+    bool sel_CC1p0pi_ = false;
 
     // Muon and leading proton candidate indices (BOGUS_INDEX if not present)
     // in the reco track arrays
@@ -683,7 +673,7 @@ void set_event_output_branch_addresses(TTree& out_tree, AnalysisEvent& ev,
   set_output_branch_address( out_tree, "nslice", &ev.nslice_, create,
     "nslice/I" );
 
-  // CCNp0pi selection criteria
+  // CC1p0pi selection criteria
   set_output_branch_address( out_tree, "sel_nu_mu_cc", &ev.sel_nu_mu_cc_,
     create, "sel_nu_mu_cc/O" );
 
@@ -727,8 +717,8 @@ void set_event_output_branch_addresses(TTree& out_tree, AnalysisEvent& ev,
   set_output_branch_address( out_tree, "sel_lead_p_passed_mom_cuts",
     &ev.sel_lead_p_passed_mom_cuts_, create, "sel_lead_p_passed_mom_cuts/O" );
 
-  set_output_branch_address( out_tree, "sel_CCNp0pi",
-    &ev.sel_CCNp0pi_, create, "sel_CCNp0pi/O" );
+  set_output_branch_address( out_tree, "sel_CC1p0pi",
+    &ev.sel_CC1p0pi_, create, "sel_CC1p0pi/O" );
 
   // Index for the muon candidate in the vectors of PFParticles
   set_output_branch_address( out_tree, "muon_candidate_idx",
@@ -1084,7 +1074,7 @@ void analyze(const std::vector<std::string>& in_file_names,
 
     set_event_output_branch_addresses( *out_tree, cur_event, create_them );
 
-    // Apply the CCNp0pi selection criteria and categorize the event.
+    // Apply the CC1p0pi selection criteria and categorize the event.
     cur_event.apply_selection();
 
     // Compute observables to save to the output TTree
@@ -1137,8 +1127,10 @@ EventCategory AnalysisEvent::categorize_event() {
   mc_no_fs_mesons_ = true;
 
   double lead_p_mom = LOW_FLOAT;
+  int mc_p_counter = 0;
 
   for ( size_t p = 0u; p < mc_nu_daughter_pdg_->size(); ++p ) {
+
     int pdg = mc_nu_daughter_pdg_->at( p );
     float energy = mc_nu_daughter_energy_->at( p );
 
@@ -1151,29 +1143,46 @@ EventCategory AnalysisEvent::categorize_event() {
 
     // Check that the muon has a momentum within the allowed range
     if ( pdg == MUON ) {
+
       double mom = real_sqrt( std::pow(energy, 2) - std::pow(MUON_MASS, 2) );
+
       if ( mom >= MUON_P_MIN_MOM_CUT && mom <= MUON_P_MAX_MOM_CUT ) {
+
         mc_muon_in_mom_range_ = true;
+
       }
+
     }
     else if ( pdg == PROTON ) {
+
       double mom = real_sqrt( std::pow(energy, 2) - std::pow(PROTON_MASS, 2) );
-      if ( mom > lead_p_mom ) lead_p_mom = mom;
+      if ( mom > lead_p_mom ) { lead_p_mom = mom; }
+
     }
     else if ( pdg == PI_ZERO ) {
+
       mc_no_fs_pi0_ = false;
+
     }
     else if ( std::abs(pdg) == PI_PLUS ) {
+
       double mom = real_sqrt( std::pow(energy, 2) - std::pow(PI_PLUS_MASS, 2) );
+
       if ( mom > CHARGED_PI_MOM_CUT ) {
+
         mc_no_charged_pi_above_threshold_ = false;
+
       }
+
     }
+
   }
 
   // Check that the leading proton has a momentum within the allowed range
   if ( lead_p_mom >= LEAD_P_MIN_MOM_CUT && lead_p_mom <= LEAD_P_MAX_MOM_CUT ) {
+
     mc_lead_p_in_mom_range_ = true;
+
   }
 
   mc_is_signal_ = mc_vertex_in_FV_ && mc_neutrino_is_numu_
@@ -1414,7 +1423,7 @@ void AnalysisEvent::apply_selection() {
   // Don't bother to apply the cuts that involve the leading
   // proton candidate if we don't have one
   if ( !sel_has_p_candidate_ ) {
-    sel_CCNp0pi_ = false;
+    sel_CC1p0pi_ = false;
     return;
   }
 
@@ -1434,9 +1443,9 @@ void AnalysisEvent::apply_selection() {
   }
 
   // All right, we've applied all selection cuts. Set the flag that indicates
-  // whether all were passed (and thus the event is selected as a CCNp0pi
+  // whether all were passed (and thus the event is selected as a CC1p0pi
   // candidate)
-  sel_CCNp0pi_ = sel_nu_mu_cc_ && sel_no_reco_showers_
+  sel_CC1p0pi_ = sel_nu_mu_cc_ && sel_no_reco_showers_
     && sel_muon_passed_mom_cuts_ && sel_muon_contained_ && sel_muon_quality_ok_
     && sel_has_p_candidate_ && sel_passed_proton_pid_cut_
     && sel_protons_contained_ && sel_lead_p_passed_mom_cuts_;

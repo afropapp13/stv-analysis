@@ -399,7 +399,7 @@ void make_plots( const std::string& branchexpr, const std::string& selection,
 
 void plots() {
 
-  const std::string sel_CCNp = "sel_CCNp0pi";
+  const std::string sel_CCNp = "sel_CC1p0pi";
   const std::string sel_CCincl = "sel_nu_mu_cc && sel_has_muon_candidate"
     " && sel_muon_above_threshold";
 
@@ -421,37 +421,37 @@ void plots() {
   //make_plots( "reco_nu_vtx_sce_z", sel_CCNpi, std::set<int>{1}, FV_Z_MIN,
   //  FV_Z_MAX, 40, "reco vertex z [cm]", "events", "Run 1" );
 
-  //make_plots( "delta_pT", "sel_CCNp0pi", // && sel_topo_cut_passed",
+  //make_plots( "delta_pT", "sel_CC1p0pi", // && sel_topo_cut_passed",
   //  std::set<int>{1}, 0., 0.8, 15, "#deltap_{T} [GeV]", "events",
   //  "Runs 1-3" );
 
   // NEW COMPARISONS with MCC8 CCNp
 
-  //make_plots( "p3_mu.CosTheta()", "sel_CCNp0pi", std::set<int>{1,2,3},
+  //make_plots( "p3_mu.CosTheta()", "sel_CC1p0pi", std::set<int>{1,2,3},
   //  { -1.0, -0.82, -0.66, -0.39, -0.16, 0.05, 0.25, 0.43, 0.59, 0.73,
   //  0.83, 0.91, 1.0 }, "cos#theta_{#mu}", "events",
   //  "MCC9 CCNp (Run 1)" );
 
   //make_plots( "TMath::ACos( (p3_mu.X()*p3_lead_p.X() + "
   //"p3_mu.Y()*p3_lead_p.Y() + p3_mu.Z()*p3_lead_p.Z()) / p3_mu.Mag()"
-  //"/ p3_lead_p.Mag() )", "sel_CCNp0pi", std::set<int>{1},
+  //"/ p3_lead_p.Mag() )", "sel_CC1p0pi", std::set<int>{1},
   //  { 0.0, 0.8, 1.2, 1.57, 1.94, 2.34, M_PI }, "#theta_{#mu-p}", "events",
   //  "MCC9 CCNp (Run 1, spline weights only)",
   //  "spline_weight" );
 
-  //make_plots( "p3_lead_p.Mag()", "sel_CCNp0pi", std::set<int>{1},
+  //make_plots( "p3_lead_p.Mag()", "sel_CC1p0pi", std::set<int>{1},
   //  { 0.3, 0.41, 0.495, 0.56, 0.62, 0.68, 0.74, 0.8, 0.87, 0.93, 1.2 },
   //  "p_{p} (GeV)", "events",
   //  "MCC9 CCNp (Run 1, spline weights only)",
   //  "spline_weight" );
 
-  //make_plots( "p3_mu.Mag()", "sel_CCNp0pi", std::set<int>{1},
+  //make_plots( "p3_mu.Mag()", "sel_CC1p0pi", std::set<int>{1},
   //  { 0.1, 0.18, 0.3, 0.48, 0.75, 1.14, 2.5 },
   //  "p_{#mu} (GeV)", "events",
   //  "MCC9 CCNp (Run 1, spline weights only)",
   //  "spline_weight" );
 
-  //make_plots( "p3_lead_p.CosTheta()", "sel_CCNp0pi", std::set<int>{1},
+  //make_plots( "p3_lead_p.CosTheta()", "sel_CC1p0pi", std::set<int>{1},
   //  { -1.0, -0.5, 0.0, 0.27, 0.45, 0.62, 0.76, 0.86, 0.94, 1.0 },
   //  "cos#theta_{p}", "events",
   //  "MCC9 CCNp (Run 1, spline weights only)",

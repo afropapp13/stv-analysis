@@ -1,4 +1,4 @@
-// Efficiencies and purities for the MCC9 CCNp0pi STV analysis
+// Efficiencies and purities for the MCC9 CC1p0pi STV analysis
 
 //  const std::string& branch, const std::string& variable_name,
 //  const std::string& hist_name, int num_bins, double x_min, double x_max)
@@ -34,7 +34,7 @@ void compute_eff_pur( TTree& stv_tree, const std::string& signal_cuts,
 }
 
 const std::string signal_cuts = "mc_is_signal";
-const std::string selection_cuts = "sel_CCNp0pi";
+const std::string selection_cuts = "sel_CC1p0pi";
 
 void effpur() {
 
@@ -66,7 +66,7 @@ void effpur() {
   "sel_nu_mu_cc && sel_no_reco_showers && sel_muon_passed_mom_cuts"
     " && sel_muon_contained && sel_muon_quality_ok && sel_has_p_candidate"
     " && sel_protons_contained && sel_passed_proton_pid_cut",
-  "sel_CCNp0pi" };
+  "sel_CC1p0pi" };
 
   TChain stv_ch( "stv_tree" );
   stv_ch.Add( "/uboone/data/users/apapadop/PeLEE_PostProcessing/stv-prodgenie_bnb_nu_uboone_overlay_mcc9.1_v08_00_00_26_filter_run1_reco2_reco2.root" );

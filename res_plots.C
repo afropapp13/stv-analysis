@@ -485,11 +485,11 @@ void res_plots() {
   //auto& fpm = FilePropertiesManager::Instance();
   //fpm.load_file_properties( "new_file_properties.txt" );
 
-  //make_res_plots( "delta_alphaT * 180 / TMath::ACos(-1.)", "#delta#alpha_{T}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_alphaT * 180 / TMath::ACos(-1.)", "#delta#alpha_{T}", "sel_CC1p0pi", {1},
   //  { 0, 25., 60., 95., 120., 145., 165., 180. },
   //  false );
 
-  //make_res_plots( "delta_pT", "#deltap_{T}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pT", "#deltap_{T}", "sel_CC1p0pi", {1},
   //  { 0, 0.06, 0.12, 0.18, 0.24, 0.32, 0.4, 0.48, 0.55, 0.68,
   //    0.75, 0.9 },
   //  false );
@@ -512,24 +512,24 @@ void res_plots() {
   //  { >= 0.4, { 0, 25., 60., 95., 120., 145., 165., 180. } },
   //}
 
-  //make_res_plots( "delta_pTy", "#deltap_{Ty}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pTy", "#deltap_{Ty}", "sel_CC1p0pi", {1},
   //  { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075, 0.15, 0.25,
   //    0.35, 0.45, 0.6 },
   // false );
 
-  //make_res_plots( "p3_lead_p.Mag()", "p_p", "sel_CCNp0pi", {1},
+  //make_res_plots( "p3_lead_p.Mag()", "p_p", "sel_CC1p0pi", {1},
   //  { 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8,
   //    0.85, 0.9, 0.95, 1.0 },
   // false );
 
-  //make_res_plots( "p3_mu.Mag()", "p_#mu", "sel_CCNp0pi", {1},
+  //make_res_plots( "p3_mu.Mag()", "p_#mu", "sel_CC1p0pi", {1},
   //  { 0.1, 0.15, 0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4,
   //    0.425, 0.45, 0.475, 0.5, 0.55, 0.6, 0.65,
   //    0.7, 0.75, 0.8, 0.85, 0.9,
   //    0.95, 1.0, 1.1, 1.2 },
   // false );
 
-  make_res_plots( "p3_lead_p.CosTheta()", "#cos#theta_{p}", "sel_CCNp0pi", {1},
+  make_res_plots( "p3_lead_p.CosTheta()", "#cos#theta_{p}", "sel_CC1p0pi", {1},
     { -1., -0.9, -0.75, -0.6, -0.45, -0.3, -0.15, 0.0,
       0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0 }, false );
 
@@ -546,7 +546,7 @@ void res_plots() {
   //make_res_plots( "TMath::ACos( (p3_mu.X()*p3_lead_p.X() + "
   //  "p3_mu.Y()*p3_lead_p.Y() + p3_mu.Z()*p3_lead_p.Z()) / p3_mu.Mag()"
   //  "/ p3_lead_p.Mag() ) * 180. / TMath::ACos(-1.)",
-  //  "#theta_{#mu-p}", "sel_CCNp0pi", std::set<int>{1},
+  //  "#theta_{#mu-p}", "sel_CC1p0pi", std::set<int>{1},
   //  { 0., 30., 40., 50., 60., 70., 80., 90., 100., 110., 120., 130.,
   //    140., 150., 180. },
   //  false, false, DEFAULT_TRUE_BINS,
@@ -556,7 +556,7 @@ void res_plots() {
   //  " / mc_p3_lead_p.Mag() ) * 180. / TMath::ACos(-1.)"
   //);
 
-  //make_res_plots( "pn", "p_{n}", "sel_CCNp0pi", {1},
+  //make_res_plots( "pn", "p_{n}", "sel_CC1p0pi", {1},
   //  { 0., 0.07, 0.14, 0.21, 0.28, 0.35,
   //    0.45, 0.54, 0.66, 0.77, 0.9 },
   //  false );
@@ -565,7 +565,7 @@ void res_plots() {
   //make_res_plots( "TMath::ACos( (p3_mu.X()*p3_lead_p.X() + "
   //  "p3_mu.Y()*p3_lead_p.Y() + p3_mu.Z()*p3_lead_p.Z()) / p3_mu.Mag()"
   //  "/ p3_lead_p.Mag() ) * 180. / TMath::ACos(-1.)",
-  //  "#theta_{#mu-p}", "sel_CCNp0pi && pn >= 0.45", std::set<int>{1},
+  //  "#theta_{#mu-p}", "sel_CC1p0pi && pn >= 0.45", std::set<int>{1},
   //  { 0., 30., 45., 60., 75., 90., 105., 120., 135.,
   //    150., 180. },
   //  false, false, DEFAULT_TRUE_BINS,
@@ -589,21 +589,21 @@ void res_plots() {
   //);
 
   //make_res_plots( "delta_pTx", "#deltap_{Tx}",
-  //  "sel_CCNp0pi && mc_delta_pTy > 0.15", {1},
+  //  "sel_CC1p0pi && mc_delta_pTy > 0.15", {1},
   // { -0.6, -0.35, -0.25, -0.15, 0, 0.15, 0.25,
   //   0.35, 0.6 },
   // false );
 
 
   //make_res_plots( "delta_alphaT * 180 / TMath::ACos(-1.)", "#delta#alpha_{T}",
-  //  "sel_CCNp0pi && mc_delta_pT >= 0.4", {1},
+  //  "sel_CC1p0pi && mc_delta_pT >= 0.4", {1},
   //  { 0, 25., 60., 95., 120., 145., 165., 180. },
   //  false );
 
   //make_res_plots( "myconfig_mcc9_2D_proton.txt", {1} );
 
   // Muon momentum
-  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CCNp0pi", {1},
+  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CC1p0pi", {1},
   //  { 0.1, 0.17, 0.2, 0.23, 0.26, 0.29, 0.32, 0.35, 0.38, 0.42,
   //    0.45, 0.48, 0.51, 0.55, 0.59, 0.64, 0.69, 0.74, 0.79,
   //    0.84, 0.89, 0.94, 1.0, 1.1, 1.2 },
@@ -611,13 +611,13 @@ void res_plots() {
 
   // Leading proton momentum
   //make_res_plots( "p3_lead_p.Mag()", "p_{lead p}",
-  // "sel_CCNp0pi", {1},
+  // "sel_CC1p0pi", {1},
   //{ 0.250, 0.325, 0.4, 0.45, 0.5, 0.550, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85,
   //  0.9, 1.0 },
   //false );
 
 //  make_res_plots( "p3_lead_p.CosTheta()", "cos#theta_{p}",
-//    "sel_CCNp0pi && mc_p3_lead_p.Mag() >= 0.75 && mc_p3_lead_p.Mag() < 0.8",
+//    "sel_CC1p0pi && mc_p3_lead_p.Mag() >= 0.75 && mc_p3_lead_p.Mag() < 0.8",
 //    {1},
 //{ -1, 0.55, 0.7, 0.8, 0.87, 1.0 }
 //    , false );
@@ -625,46 +625,46 @@ void res_plots() {
 /////// END NEW STUFF
 
   //make_res_plots( "p3_lead_p.CosTheta()", "cos#theta_{p}",
-  // "sel_CCNp0pi", {1},
+  // "sel_CC1p0pi", {1},
   // { -1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8,
   //    0.85, 0.9, 0.95, 1.0 },
   // false );
 
-  //make_res_plots( "pn", "p_{n}", "sel_CCNp0pi", {2},
+  //make_res_plots( "pn", "p_{n}", "sel_CC1p0pi", {2},
   //  { 0., 0.125, 0.225, 0.325, 0.425, 0.525, 0.65, 0.85 },
   //  true, true );
 
-  //make_res_plots( "delta_alphaT", "#delta#alpha_{T}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_alphaT", "#delta#alpha_{T}", "sel_CC1p0pi", {1},
   //  { 0, 0.35, 0.85, 1.35, 1.85, 2.3, 2.7, 2.95, M_PI },
   //  true, false );
 
-  //make_res_plots( "delta_pTx", "#deltap_{Tx}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pTx", "#deltap_{Tx}", "sel_CC1p0pi", {1},
   // { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075, 0.15, 0.25,
   //   0.35, 0.45, 0.6 },
   // false, true );
 
-  //make_res_plots( "delta_pTy", "#deltap_{Ty}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pTy", "#deltap_{Ty}", "sel_CC1p0pi", {1},
   // { -0.8, -0.55, -0.39, -0.2125, -0.05, 0.1, 0.225, 0.3375, 0.5 },
   // false, true );
 
-  //make_res_plots( "delta_pL", "#deltap_{L}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pL", "#deltap_{L}", "sel_CC1p0pi", {1},
   //  { -0.8, -0.6, -0.475, -0.35, -0.225, -0.115,
   //    -0.0285, 0.0575, 0.145, 0.230, 0.315,
   //    0.4 }, false, true );
 
-  //make_res_plots( "delta_phiT", "#delta#phi_{T}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_phiT", "#delta#phi_{T}", "sel_CC1p0pi", {1},
   //{ 0., 0.075, 0.2, 0.35, 0.5, 0.7, 0.9, 1.15, 1.4, 1.65, 1.9, 2.35,
   //  2.8, M_PI },
   //false, false );
 
-  //make_res_plots( "delta_pT", "#deltap_{T}", "sel_CCNp0pi", {1},
+  //make_res_plots( "delta_pT", "#deltap_{T}", "sel_CC1p0pi", {1},
   //  { 0, 0.1, 0.2, 0.3, 0.4, 0.525, 0.675, 0.9 },
   //  false, true );
 
   /// Muon-proton opening angle
   //make_res_plots( "TMath::ACos( (p3_mu.X()*p3_lead_p.X() + "
   //  "p3_mu.Y()*p3_lead_p.Y() + p3_mu.Z()*p3_lead_p.Z()) / p3_mu.Mag()"
-  //  "/ p3_lead_p.Mag() )", "#theta_{#mu-p}", "sel_CCNp0pi", std::set<int>{1},
+  //  "/ p3_lead_p.Mag() )", "#theta_{#mu-p}", "sel_CC1p0pi", std::set<int>{1},
 
   //  { 0, 0.52, 0.78, 1.0, 1.15, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1,
   //    2.35, 2.62, M_PI },
@@ -676,25 +676,25 @@ void res_plots() {
   //  " / mc_p3_mu.Mag() / mc_p3_lead_p.Mag() )"
   //);
 
-  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CCNp0pi", {1},
+  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CC1p0pi", {1},
   //  { 0.1, 0.17, 0.24, 0.3, 0.48, 0.75, 1.14, 2.5 },
   //  false );
 
   //make_res_plots( "p3_mu.CosTheta()", "cos(#theta_{#mu})",
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.1 && p3_mu.Mag() < 0.48"
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.1 && p3_mu.Mag() < 0.48"
   //   " && p3_lead_p.Mag() >= 0.25 && p3_lead_p.Mag() < 0.5"
   //   " && p3_lead_p.CosTheta() >= 0.5 && p3_lead_p.CosTheta() < 1.", {1},
   // { -1, -0.1, 0.35, 0.7, 0.85, 1.00 },
   // false );
 
   //make_res_plots( "p3_mu.CosTheta()", "cos(#theta_{#mu})",
-  // "sel_CCNp0pi", {1},
+  // "sel_CC1p0pi", {1},
   // { -1, -0.85, -0.775, -0.7, -0.625, -0.55, -0.475, -0.4, -0.325,
   //   -0.25, -0.175, -0.1, -0.025, 0.05, 0.125, 0.2, 0.275, 0.35, 0.425, 0.5,
   //    0.575, 0.65, 0.725, 0.8, 0.85, 0.875, 0.9, 0.925, 0.950, 0.975, 1.00 },
   // false );
 
-  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CCNp0pi", {1},
+  //make_res_plots( "p3_mu.Mag()", "p_{#mu}", "sel_CC1p0pi", {1},
   //  { 0.1, 0.17, 0.21, 0.24, 0.27, 0.3, 0.38, 0.48, 0.75, 1.14, 2.5, 100. },
   //  false );
 
@@ -703,34 +703,34 @@ void res_plots() {
   ///////////////////////////////////////////////////////
 
   //make_res_plots( "p3_mu.CosTheta()", "cos#theta_{#mu}",
-  //  "sel_CCNp0pi && p3_mu.Mag() >= 0.1 && p3_mu.Mag() < 0.17", {1},
+  //  "sel_CC1p0pi && p3_mu.Mag() >= 0.1 && p3_mu.Mag() < 0.17", {1},
   //  { -1, 0., 1. },
 
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.17 && p3_mu.Mag() < 0.21", {1},
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.17 && p3_mu.Mag() < 0.21", {1},
   // { -1, -0.2, 0.4, 1. },
 
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.21 && p3_mu.Mag() < 0.24", {1},
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.21 && p3_mu.Mag() < 0.24", {1},
   // { -1, -0.2, 0.4, 1.00 },
 
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.24 && p3_mu.Mag() < 0.27", {1},
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.24 && p3_mu.Mag() < 0.27", {1},
   // { -1, -0.1, 0.5, 1.00 },
 
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.27 && p3_mu.Mag() < 0.3", {1},
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.27 && p3_mu.Mag() < 0.3", {1},
   // { -1, -0.1, 0.35, 0.6, 1.00 },
 
-  // "sel_CCNp0pi && p3_mu.Mag() >= 0.3 && p3_mu.Mag() < 0.38", {1},
+  // "sel_CC1p0pi && p3_mu.Mag() >= 0.3 && p3_mu.Mag() < 0.38", {1},
   // { -1, -0.4, -0.1, 0.1, 0.35, 0.5, 0.7, 0.85, 1.00 },
 
-  //"sel_CCNp0pi && p3_mu.Mag() >= 0.38 && p3_mu.Mag() < 0.48", {1},
+  //"sel_CC1p0pi && p3_mu.Mag() >= 0.38 && p3_mu.Mag() < 0.48", {1},
   //{ -1, 0, 0.5, 0.65, 0.8, 0.92, 1.00 },
 
-  //"sel_CCNp0pi && p3_mu.Mag() >= 0.48 && p3_mu.Mag() < 0.75", {1},
+  //"sel_CC1p0pi && p3_mu.Mag() >= 0.48 && p3_mu.Mag() < 0.75", {1},
   //{ -1, 0.2, 0.5, 0.65, 0.8, 0.875, 0.950, 1.00 },
 
-  //"sel_CCNp0pi && p3_mu.Mag() >= 0.75 && p3_mu.Mag() < 1.14", {1},
+  //"sel_CC1p0pi && p3_mu.Mag() >= 0.75 && p3_mu.Mag() < 1.14", {1},
   //{ -1, 0.5, 0.8, 0.875, 0.950, 1.00 },
 
-  //"sel_CCNp0pi && p3_mu.Mag() >= 1.14 && p3_mu.Mag() < 2.5", {1},
+  //"sel_CC1p0pi && p3_mu.Mag() >= 1.14 && p3_mu.Mag() < 2.5", {1},
   //{ -1, 0.75, 0.85, 0.9, 0.950, 1.00 },
 
   //false );
@@ -742,66 +742,66 @@ void res_plots() {
   ///////////////////////////////////////////////////////
 
   //make_res_plots( "p3_lead_p.Mag()", "p_{lead p}",
-  // "sel_CCNp0pi", {1},
+  // "sel_CC1p0pi", {1},
   //{ 0.250, 0.325, 0.4, 0.45, 0.5, 0.550, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9,
   //  0.975, 1.20 },
   //false );
 
   //make_res_plots( "p3_lead_p.CosTheta()", "cos#theta_{p}",
-  // "sel_CCNp0pi", {1},
+  // "sel_CC1p0pi", {1},
   // { -1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8,
   //    0.85, 0.9, 0.95, 1.0 },
   // false );
 
   //make_res_plots( "p3_lead_p.CosTheta()", "cos#theta_{p}",
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.250 && p3_lead_p.Mag() < 0.325", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.250 && p3_lead_p.Mag() < 0.325", {1},
   //  { -1, -0.5, 0.1, 0.6, 1.0 },
 
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.325 && p3_lead_p.Mag() < 0.4", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.325 && p3_lead_p.Mag() < 0.4", {1},
   //  { -1, -0.7, -0.4, 0, 0.4, 0.6, 0.8, 1.0 },
 
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.4 && p3_lead_p.Mag() < 0.45", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.4 && p3_lead_p.Mag() < 0.45", {1},
   //   { -1, -0.5, -0.1, 0.2, 0.5, 0.65, 0.85, 1.0 },
 
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.45 && p3_lead_p.Mag() < 0.5", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.45 && p3_lead_p.Mag() < 0.5", {1},
   //   { -1, -0.4, 0, 0.2, 0.4, 0.55, 0.65, 0.8, 0.92, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.5 && p3_lead_p.Mag() < 0.550", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.5 && p3_lead_p.Mag() < 0.550", {1},
   //  { -1, -0.2, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
 
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.550 && p3_lead_p.Mag() < 0.6", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.550 && p3_lead_p.Mag() < 0.6", {1},
   //  { -1, 0, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.6 && p3_lead_p.Mag() < 0.65", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.6 && p3_lead_p.Mag() < 0.65", {1},
   //  { -1, 0.1, 0.37, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
 
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.65 && p3_lead_p.Mag() < 0.7", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.65 && p3_lead_p.Mag() < 0.7", {1},
   //  { -1, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.7 && p3_lead_p.Mag() < 0.75", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.7 && p3_lead_p.Mag() < 0.75", {1},
   //  { -1, 0.45, 0.65, 0.75, 0.82, 0.9, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.75 && p3_lead_p.Mag() < 0.8", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.75 && p3_lead_p.Mag() < 0.8", {1},
   //  { -1, 0.55, 0.7, 0.8, 0.87, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.8 && p3_lead_p.Mag() < 0.85", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.8 && p3_lead_p.Mag() < 0.85", {1},
   // { -1, 0.65, 0.78, 0.89, 1.0 },
 
 //CCCC
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.85 && p3_lead_p.Mag() < 0.9", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.85 && p3_lead_p.Mag() < 0.9", {1},
   //  { -1, 0.73, 0.86, 1.0 },
 
 //CCCC 150
-    //"sel_CCNp0pi && p3_lead_p.Mag() >= 0.9 && p3_lead_p.Mag() < 0.975", {1},
+    //"sel_CC1p0pi && p3_lead_p.Mag() >= 0.9 && p3_lead_p.Mag() < 0.975", {1},
     //{ -1, 0.77, 0.88, 1.0 },
 
 //CCCC 150
-  //  "sel_CCNp0pi && p3_lead_p.Mag() >= 0.975 && p3_lead_p.Mag() < 1.20", {1},
+  //  "sel_CC1p0pi && p3_lead_p.Mag() >= 0.975 && p3_lead_p.Mag() < 1.20", {1},
   //  { -1, 0.84, 1.0 },
 
   //false );
