@@ -3,8 +3,12 @@
 #include "UniverseMaker.hh"
 #include "SliceBinning.hh"
 
+//------------------------------------//
+
 // Placeholder value for the block index for bins in which it is irrelevant
 constexpr int DUMMY_BLOCK_INDEX = -1;
+
+//------------------------------------//
 
 // Sideband selection cuts
 const std::string sel_dirt =
@@ -34,6 +38,8 @@ const std::string sel_CCNpi =
 const std::string sel_combined =
   "((" + sel_dirt + ") || (" + sel_NC + ") || (" + sel_CCNpi + "))";
 
+//------------------------------------//
+
 struct EdgeDef {
 
   EdgeDef( std::map< double, std::vector<double> >* edges, bool use_overflow,
@@ -47,13 +53,67 @@ struct EdgeDef {
   std::string branch_var_name_;
   std::string active_var_name_;
   std::string other_var_name_;
+
 };
+
+//------------------------------------//
 
 std::vector< EdgeDef > MOM_ANG_2D_EDGES = {
   { &MUON_2D_BIN_EDGES, false, "p3_mu", "cos#theta_{#mu}",
     "p_{#mu}" },
   { &PROTON_2D_BIN_EDGES, false, "p3_lead_p", "cos#theta_{p}",
     "p_{p}" },
+};
+
+//------------------------------------//
+
+// 1D binning
+
+std::vector< double > pT_1D_edges = { 0., 0.05, 0.1 , 0.15, 0.2 , 0.25,
+  0.3, 0.35, 0.4 , 0.47, 0.55, 0.65, 0.75, 0.9 };
+
+std::vector< double > pTx_1D_edges = { -DBL_MAX, -0.55,-0.45,-0.35,-0.25,
+  -0.15,-0.05,0.05,0.15,0.25,0.35,0.45,0.55, DBL_MAX };
+
+// Reconstructed initial nucleon momentum (pn)
+std::vector< double > pn_1D_edges = { 0,0.07,0.14,0.2,0.3,0.4,0.47,0.55,
+  0.65,0.75,0.85 };
+
+// cos_theta_mu in 1D
+std::vector< double > cos_theta_mu_1D_edges = { -1.,-0.85,-0.7,-0.57,
+  -0.45,-0.32,-0.2,-0.1,0.,0.1,0.2,0.3,0.4,0.5,0.6,0.72,0.84,0.95,1. };
+
+// cos_theta_p in 1D
+std::vector< double > cos_theta_p_1D_edges = { -1.,-0.73,-0.43,-0.18,0.05,
+  0.2,0.37,0.54,0.7,0.8,0.9,1. };
+
+// p_p in 1D
+std::vector< double > pp_1D_edges = { 0.3,0.38,0.45,0.5,0.55,0.625,0.7,
+  0.75,0.8,0.87,1. };
+
+// p_mu in 1D
+std::vector< double > pmu_1D_edges = { 0.1,0.2,0.3,0.4,0.5,0.64,0.77,
+  0.9,1.,1.1,1.2 };
+
+//------------------------------------//
+
+// 2D binning
+
+// delta_alphaT in delta_pT slices
+std::map< double, std::vector<double> > alphaT_in_pT_edges = {
+  { 0.0, { 0., 25., 60., 95., 120., 145., 165., 180. } },
+  { 0.2, { 0., 25., 60., 95., 120., 145., 165., 180. } },
+  { 0.3, { 0., 25., 60., 95., 120., 145., 165., 180. } },
+  { 0.4, { 0., 25., 60., 95., 120., 145., 165., 180. } },
+};
+
+// delta_pTx in delta_pTy slices
+std::map< double, std::vector<double> > pTx_in_pTy_edges = {
+  { -0.15, { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075,
+    0.15, 0.25, 0.35, 0.45, 0.6 } },
+  { 0.15, { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075, 0.15, 0.25,
+    0.35, 0.45, 0.6 } },
+  { DBL_MAX, { -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4 } },
 };
 
 // delta_pT in delta_alphaT slices
@@ -65,66 +125,11 @@ std::map< double, std::vector<double> > pT_in_alphaT_edges = {
   { 180., {} },
 };
 
-// delta_alphaT in delta_pT slices
-std::map< double, std::vector<double> > alphaT_in_pT_edges = {
-  { 0.0, { 0., 25., 60., 95., 120., 145., 165., 180. } },
-  { 0.2, { 0., 25., 60., 95., 120., 145., 165., 180. } },
-  { 0.3, { 0., 25., 60., 95., 120., 145., 165., 180. } },
-  { 0.4, { 0., 25., 60., 95., 120., 145., 165., 180. } },
-};
+//------------------------------------//
 
-std::vector< double > pT_1D_edges = { 0., 0.06, 0.12, 0.18, 0.24, 0.32,
-  0.4, 0.48, 0.55, 0.68, 0.75, 0.9 };
+// 3D binning
 
-std::vector< double > pTx_1D_edges = { -DBL_MAX, -0.6, -0.45, -0.35, -0.25,
-  -0.15, -0.075, 0, 0.075, 0.15, 0.25, 0.35, 0.45, 0.6, DBL_MAX };
-
-// delta_pTx in delta_pTy slices
-std::map< double, std::vector<double> > pTx_in_pTy_edges = {
-  { -0.15, { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075,
-    0.15, 0.25, 0.35, 0.45, 0.6 } },
-  { 0.15, { -0.6, -0.45, -0.35, -0.25, -0.15, -0.075, 0, 0.075, 0.15, 0.25,
-    0.35, 0.45, 0.6 } },
-  { DBL_MAX, { -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4 } },
-};
-
-// Muon-proton opening angle (deg)
-std::vector< double > theta_mu_p_1D_edges = { 0., 30., 40., 50., 60., 70.,
-  80., 90., 100., 110., 120., 130., 140., 150., 180. };
-
-// Reconstructed initial nucleon momentum (pn)
-std::vector< double > pn_1D_edges = { 0., 0.07, 0.14, 0.21, 0.28, 0.35,
-  0.45, 0.54, 0.66, 0.77, 0.9 };
-
-// theta_mu_p in pn slices
-std::map< double, std::vector<double> > theta_mu_p_in_pn_edges = {
-  { 0., { 0., 60., 70., 80., 90., 100., 110., 120., 130.,
-    140., 150., 180. } },
-  { 0.21, { 0., 45., 60., 75., 90., 100., 110., 120., 130.,
-    140., 150., 180. } },
-  { 0.45, { 0., 30., 45., 60., 75., 90., 105., 120., 135.,
-    150., 180. } },
-};
-
-// cos_theta_mu in 1D
-std::vector< double > cos_theta_mu_1D_edges = { -1., -0.85, -0.775, -0.7,
-  -0.625, -0.55, -0.475, -0.4, -0.325, -0.25, -0.175, -0.1, -0.025, 0.05,
-   0.125, 0.2, 0.275, 0.35, 0.425, 0.5, 0.575, 0.65, 0.725, 0.8, 0.85,
-   0.875, 0.9, 0.925, 0.950, 0.975, 1. };
-
-// cos_theta_p in 1D
-std::vector< double > cos_theta_p_1D_edges = { -1., -0.9, -0.75, -0.6,
-  -0.45, -0.3, -0.15, 0.0, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9,
-  0.925, 0.95, 0.975, 1.0 };
-
-// p_p in 1D
-std::vector< double > pp_1D_edges = { 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55,
-  0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0 };
-
-// p_mu in 1D
-std::vector< double > pmu_1D_edges = { 0.1, 0.15, 0.175, 0.2, 0.225, 0.25,
-  0.275, 0.3, 0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475, 0.5, 0.55, 0.6,
-  0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0, 1.1, 1.2 };
+//------------------------------------//
 
 void make_config_all() {
 
@@ -142,7 +147,6 @@ void make_config_all() {
     { "#delta#alpha_{T}", "\\delta\\alpha_{T}", "deg", "\\text{deg}" },
     { "#deltap_{Tx}", "\\delta p_{T_x}", "GeV", "\\text{GeV}" },
     { "#deltap_{Ty}", "\\delta p_{T_y}", "GeV", "\\text{GeV}" },
-    { "#theta_{#mu,p}", "\\theta_{\\mu,p}", "deg", "\\text{deg}" },
     { "p_{n}", "p_{n}", "GeV", "\\text{GeV}" },
     { "cos#theta_{#mu}", "\\cos\\theta_{\\mu}", "", "" },
     { "bin number", "\\text{ bin number}", "", "" }
@@ -159,10 +163,16 @@ void make_config_all() {
     "category == 9", "category == 10", "category == 11"
   };
 
+  //------------------------------------//
+  //------------------------------------//
+
   std::vector< TrueBin > true_bins;
   std::vector< RecoBin > reco_bins;
 
-//// Blocks for 2D momentum/angle measurements for the muon and leading proton
+  //------------------------------------//
+  //------------------------------------//
+
+  //// Blocks for 2D momentum/angle measurements for muon and proton
 
   // Configure kinematic limits for all of the signal bins. Assign them to
   // blocks (for unfolding purposes) using an index which is incremented
@@ -289,14 +299,17 @@ void make_config_all() {
 
       std::string reco_bin_def = reco_ss.str();
       reco_bins.emplace_back( reco_bin_def, kOrdinaryRecoBin, block_index );
+
     }
 
     // Save a vector of the momentum bin edges. We need them contiguous
     // in memory to create a new TH1D using them below.
     std::vector< double > mom_bin_edges;
     for ( const auto& edge_pair : *edge_def.bin_edges_2d_ ) {
+
       double mom = edge_pair.first;
       mom_bin_edges.push_back( mom );
+
     }
 
     // Create a slice in which we've integrated over all angular bins
@@ -327,14 +340,20 @@ void make_config_all() {
       if ( plow == phigh ) continue;
 
       for ( const auto& sl_bin_pair : temp_slice.bin_map_ ) {
+
         const auto& ana_bin_set = sl_bin_pair.second;
+
         for ( const size_t ana_bin_idx : ana_bin_set ) {
+
           cur_slice.bin_map_[ mom_root_bin_idx ].insert( ana_bin_idx );
+
         }
+
       }
 
       // Move onward to the next momentum bin
       ++mom_root_bin_idx;
+
     }
 
     // Get the index of the final analysis bin in this block
@@ -348,9 +367,12 @@ void make_config_all() {
 
     auto& bin_num_slice = add_slice( sb, num_block_bins, first_block_bin_idx,
       last_block_bin_idx + 1, bin_number_var_idx );
+
     for ( int ab = first_block_bin_idx; ab <= last_block_bin_idx; ++ab ) {
+
       // The ROOT histogram bins are one-based, so we correct for this here
       bin_num_slice.bin_map_[ ab + 1 - first_block_bin_idx ].insert( ab );
+
     }
 
     // For the proton measurement, also make a slice integrated over both
@@ -362,13 +384,19 @@ void make_config_all() {
     auto& total_slice = add_slice( sb, 1, -1., 1., cosp_var_idx, pp_var_idx,
       PROTON_2D_BIN_EDGES.cbegin()->first,
       PROTON_2D_BIN_EDGES.crbegin()->first );
+
     for ( int ab = first_block_bin_idx; ab <= last_block_bin_idx; ++ab ) {
+
       total_slice.bin_map_[ 1 ].insert( ab );
+
     }
 
   }
 
-//// 1D delta_pT block
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 1D delta_pT block
 
   // Move into the next block
   ++block_index;
@@ -452,11 +480,17 @@ void make_config_all() {
 
   // Also make a slice integrated over all delta_alphaT values
   auto& total_slice = add_slice( sb, 1, 0., 180., alphaT_var_idx );
+
   for ( int ab = first_block_bin_idx; ab <= last_block_bin_idx; ++ab ) {
+
     total_slice.bin_map_[ 1 ].insert( ab );
+
   }
 
-//// 2D block of delta_pT in delta_alphaT slices
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 2D block of delta_pT in delta_alphaT slices
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -573,12 +607,16 @@ void make_config_all() {
     first_block_bin_idx, last_block_bin_idx + 1, bin_number_var_idx );
 
   for ( int block_bin = 0; block_bin < num_block_bins; ++block_bin ) {
+
     int analysis_bin = first_block_bin_idx + block_bin;
     // The ROOT histogram bins are one-based, so we correct for this here
     block_bin_num_slice.bin_map_[ block_bin + 1 ].insert( analysis_bin );
+
   }
 
-//// 2D block of delta_alphaT in delta_pT slices
+  //------------------------------------//
+
+  //// 2D block of delta_alphaT in delta_pT slices
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -687,7 +725,10 @@ void make_config_all() {
     block_bin_num_slice2.bin_map_[ block_bin + 1 ].insert( analysis_bin );
   }
 
-//// 1D delta_pTx block
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 1D delta_pTx block
 
   // Increment the block index
   ++block_index;
@@ -751,7 +792,10 @@ void make_config_all() {
 
   } // loop over 1D delta_pTx bins
 
-//// 2D block delta_pTx in delta_pTy slices
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 2D block delta_pTx in delta_pTy slices
   int pTy_var_idx = find_slice_var_index( "#deltap_{Ty}",
     sb.slice_vars_ );
 
@@ -831,7 +875,9 @@ void make_config_all() {
       // bin index into the map entry. Leave out the under/overflow bins
       // given how the slice is defined.
       if ( b > -1 && b < num_pTx_bins ) {
+
         cur_slice.bin_map_[ b + 1 ].insert( ana_bin_idx );
+
       }
 
       // Define the new bin and add it to the vector of reco bins
@@ -858,70 +904,10 @@ void make_config_all() {
     block_bin_num_slice3.bin_map_[ block_bin + 1 ].insert( analysis_bin );
   }
 
-//// 1D theta_mu_p block
+  //------------------------------------//
+  //------------------------------------//
 
-  // Increment the block index for the current set of bin edges
-  ++block_index;
-
-  // Get the index of the first analysis bin in this block
-  first_block_bin_idx = reco_bins.size();
-
-  // Get the index for the theta_mu_p variable definition. We will use
-  // it to make a new slice while also defining the 1D bins.
-  int theta_mu_p_var_idx = find_slice_var_index( "#theta_{#mu,p}",
-    sb.slice_vars_ );
-
-  // Use a version of the muon-leading-proton opening angle expressed in degrees
-  const std::string mc_theta_mu_p_deg( "mc_theta_mu_p * 180."
-    "/ TMath::ACos(-1.)" );
-
-  const std::string reco_theta_mu_p_deg( "theta_mu_p * 180."
-    "/ TMath::ACos(-1.)" );
-
-  size_t num_theta_mu_p_1D_edges = theta_mu_p_1D_edges.size();
-  size_t num_theta_mu_p_1D_bins = 0u;
-  if ( num_theta_mu_p_1D_edges >= 2u ) num_theta_mu_p_1D_bins
-    = num_theta_mu_p_1D_edges - 1u;
-
-  // Before defining each bin, make a new Slice object and set up the
-  // corresponding ROOT histogram within it
-  auto& tmp_slice = add_slice( sb, theta_mu_p_1D_edges, theta_mu_p_var_idx );
-
-  for ( size_t b = 0u; b < num_theta_mu_p_1D_bins; ++b ) {
-
-    double theta_mu_p_low = theta_mu_p_1D_edges.at( b );
-    double theta_mu_p_high = theta_mu_p_1D_edges.at( b + 1u );
-
-    std::stringstream true_ss;
-    true_ss << signal_def << " && " << mc_theta_mu_p_deg << " >= "
-      << theta_mu_p_low << " && " << mc_theta_mu_p_deg << " < "
-      << theta_mu_p_high;
-
-    std::string true_bin_def = true_ss.str();
-
-    true_bins.emplace_back( true_bin_def, kSignalTrueBin, block_index );
-
-    std::stringstream reco_ss;
-    reco_ss << selection << " && " << reco_theta_mu_p_deg << " >= "
-      << theta_mu_p_low << " && " << reco_theta_mu_p_deg << " < "
-      << theta_mu_p_high;
-
-    std::string reco_bin_def = reco_ss.str();
-
-    // Here we use a trick: the current analysis bin index is equal
-    // to the size of the reco_bins vector before we add the new element.
-    size_t ana_bin_idx = reco_bins.size();
-    // Here's another trick: the call to operator[]() below will create
-    // a new map entry if needed. We then insert the current analysis
-    // bin index into the map entry.
-    tmp_slice.bin_map_[ b + 1 ].insert( ana_bin_idx );
-
-    // Define the new bin and add it to the vector of reco bins
-    reco_bins.emplace_back( reco_bin_def, kOrdinaryRecoBin, block_index );
-
-  } // loop over 1D theta_mu_p bins
-
-//// 1D pn block
+  //// 1D pn block
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -977,106 +963,10 @@ void make_config_all() {
 
   } // loop over 1D pn bins
 
-//// 2D block of theta_mu_p in pn slices
+  //------------------------------------//
+  //------------------------------------//
 
-  // Increment the block index for the current set of bin edges
-  ++block_index;
-
-  // Get the index of the first analysis bin in this block
-  first_block_bin_idx = reco_bins.size();
-
-  auto begin = theta_mu_p_in_pn_edges.cbegin();
-  auto end2 = theta_mu_p_in_pn_edges.cend();
-
-  for ( auto iter = begin; iter != end2; ++iter )
-  {
-    // Get an iterator to the map element after the current one. Due to the
-    // automatic sorting, this will contain the upper edge of the
-    // current non-overflow pn bin
-    auto next = iter;
-    ++next;
-
-    // Get the current delta_alphaT bin limits
-    double pn_low = iter->first;
-    double pn_high = DBL_MAX;
-    if ( next != end2 ) pn_high = next->first;
-
-    // Now iterate over the theta_mu_p bins associated with the current
-    // pn bin. Note that we will skip any situations in which the
-    // binning is undefined (i.e., because there are less than two bin edges
-    // given)
-    const auto& theta_mu_p_bin_edges = iter->second;
-
-    size_t num_theta_mu_p_edges = theta_mu_p_bin_edges.size();
-    size_t num_theta_mu_p_bins = 0u;
-    if ( num_theta_mu_p_edges >= 2u ) {
-      num_theta_mu_p_bins = num_theta_mu_p_edges - 1u;
-    }
-
-    // Before defining each bin, make a new Slice object and set up the
-    // corresponding ROOT histogram within it
-    auto& cur_slice = add_slice( sb, theta_mu_p_bin_edges, theta_mu_p_var_idx,
-      pn_var_idx, pn_low, pn_high );
-
-    for ( size_t b = 0u; b < num_theta_mu_p_bins; ++b ) {
-
-      double theta_mu_p_low = theta_mu_p_bin_edges.at( b );
-      double theta_mu_p_high = theta_mu_p_bin_edges.at( b + 1u );
-
-      std::stringstream true_ss;
-      true_ss << signal_def << " && " << mc_theta_mu_p_deg << " >= "
-        << theta_mu_p_low << " && " << mc_theta_mu_p_deg << " < "
-        << theta_mu_p_high << " && mc_pn >= " << pn_low;
-
-      if ( pn_high != DBL_MAX ) true_ss << " && mc_pn < " << pn_high;
-
-      std::string true_bin_def = true_ss.str();
-
-      true_bins.emplace_back( true_bin_def, kSignalTrueBin, block_index );
-
-      std::stringstream reco_ss;
-      reco_ss << selection << " && " << reco_theta_mu_p_deg << " >= "
-        << theta_mu_p_low << " && " << reco_theta_mu_p_deg << " < "
-        << theta_mu_p_high << " && pn >= " << pn_low;
-
-      if ( pn_high != DBL_MAX ) reco_ss << " && pn < " << pn_high;
-
-      std::string reco_bin_def = reco_ss.str();
-
-      // Here we use a trick: the current analysis bin index is equal
-      // to the size of the reco_bins vector before we add the new element.
-      size_t ana_bin_idx = reco_bins.size();
-      // Here's another trick: the call to operator[]() below will create
-      // a new map entry if needed. We then insert the current analysis
-      // bin index into the map entry.
-      cur_slice.bin_map_[ b + 1 ].insert( ana_bin_idx );
-
-      // Define the new bin and add it to the vector of reco bins
-      reco_bins.emplace_back( reco_bin_def, kOrdinaryRecoBin, block_index );
-
-    } // loop over theta_mu_p bins
-
-  } // loop over pn bins
-
-  // Get the index of the final analysis bin in this block
-  last_block_bin_idx = reco_bins.size() - 1;
-
-  // Create a slice in which all bins in the current block are shown as a
-  // function of bin number
-  num_block_bins = last_block_bin_idx - first_block_bin_idx + 1;
-  bin_number_var_idx = find_slice_var_index( "bin number",
-    sb.slice_vars_ );
-
-  auto& block_bin_num_slice4 = add_slice( sb, num_block_bins,
-    first_block_bin_idx, last_block_bin_idx + 1, bin_number_var_idx );
-
-  for ( int block_bin = 0; block_bin < num_block_bins; ++block_bin ) {
-    int analysis_bin = first_block_bin_idx + block_bin;
-    // The ROOT histogram bins are one-based, so we correct for this here
-    block_bin_num_slice4.bin_map_[ block_bin + 1 ].insert( analysis_bin );
-  }
-
-//// 1D cos_theta_mu block
+  //// 1D cos_theta_mu block
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -1130,7 +1020,10 @@ void make_config_all() {
 
   } // loop over 1D cos_theta_mu bins
 
-//// 1D cos_theta_p block
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 1D cos_theta_p block
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -1184,7 +1077,10 @@ void make_config_all() {
 
   } // loop over 1D cos_theta_p bins
 
-//// 1D p_p block
+  //------------------------------------//
+  //------------------------------------//
+
+  //// 1D p_p block
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -1237,8 +1133,10 @@ void make_config_all() {
 
   } // loop over 1D p_p bins
 
+  //------------------------------------//
+  //------------------------------------//
 
-//// 1D p_mu block
+  //// 1D p_mu block
 
   // Increment the block index for the current set of bin edges
   ++block_index;
@@ -1291,33 +1189,10 @@ void make_config_all() {
 
   } // loop over 1D p_mu bins
 
-//// Slice showing all blocks of ordinary reco bins / signal true bins
+  //------------------------------------//
+  //------------------------------------//
 
-  //// Create a slice showing all blocks together as a function of bin number
-  //int num_ord_bins = reco_bins.size();
-
-  //auto& ord_bin_num_slice = add_slice( sb, num_ord_bins, 0, num_ord_bins,
-  //  bin_number_var_idx );
-  //for ( int ab = 0; ab < num_ord_bins; ++ab ) {
-  //  // The ROOT histogram bins are one-based, so we correct for this here
-  //  ord_bin_num_slice.bin_map_[ ab + 1 ].insert( ab );
-  //}
-
-//// Sideband reco bins
-
-  //// Clone each of the ordinary reco bins and apply the sideband selection
-  //for ( int ob = 0; ob < num_ord_bins; ++ob ) {
-  //  const auto& rbin = reco_bins.at( ob );
-
-  //  // Strip out the initial selection flag ("sel_CC1p0pi") and replace
-  //  // it in the selection cuts with the sideband selection
-  //  size_t drop_pos = rbin.selection_cuts_.find( "&&" );
-  //  std::string sel_new = sel_combined + ' '
-  //    + rbin.selection_cuts_.substr( drop_pos );
-  //  reco_bins.emplace_back( sel_new, kSidebandRecoBin, DUMMY_BLOCK_INDEX );
-  //}
-
-//// Final definitions
+  //// Final definitions
 
   int num_bins = reco_bins.size();
 
@@ -1343,6 +1218,9 @@ void make_config_all() {
     true_bins.emplace_back( bdef, kBackgroundTrueBin, DUMMY_BLOCK_INDEX );
   }
 
+  //------------------------------------//
+  //------------------------------------//
+
   // Dump this information to the output files
   std::ofstream out_file( "myconfig_all.txt" );
   out_file << "ALL\n";
@@ -1356,4 +1234,5 @@ void make_config_all() {
   // Also write a SliceBinning configuration file
   std::ofstream sb_file( "mybins_all.txt" );
   sb_file << sb;
+
 }

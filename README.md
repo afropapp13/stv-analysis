@@ -19,3 +19,16 @@ emacs -nw EventCategory.hh
 emacs -nw FilePropertiesManager.hh
 
 make
+
+# Generate the configuration
+root -b make_config_all.C
+
+# Pro-processing
+./reprocess.sh /uboone/data/users/apapadop/PeLEE_PostProcessing/   files_to_process.txt
+
+# Dumping the post-processed file paths in txt file
+ls -d /uboone/data/users/apapadop/PeLEE_PostProcessing/*.root | tee post_processed_file_list.txt
+
+# Systematics manipulation
+./univmake post_processed_file_list.txt myconfig_all.txt /uboone/data/users/apapadop/PeLEE_PostProcessing/xsec_analysis.root file_properties.txt
+
